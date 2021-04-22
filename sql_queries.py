@@ -23,19 +23,83 @@ staging_events_table_create= ("""
 staging_songs_table_create = ("""
 """)
 
+# Fact Table (songplay)
+
+# songplays - records in event data associated with song plays i.e. records with page NextSong
+# songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent
+
 songplay_table_create = ("""
+    CREATE TABLE IF NOT EXISTS songplay(
+        songplay_id INTEGER IDENTITY(0,1) PRIMARY KEY,
+        start_time TIMESTAMP NOT NULL
+        user_id VARCHAR NOT NULL,
+        level VARCHAR,
+        song_id VARCHAR NOT NULL,
+        artist_id VARCHAR NOT NULL,
+        session_id INTEGER,
+        location VARCHAR,
+        user_agent VARCHAR,
+        FOREIGN KEY (start_time) REFERENCES time(start_time)
+        FOREIGN KEY (user_id) REFERENCES users(user_id)
+        FOREIGN KEY (song_id) REFERENCES songs(song_id)
+        FOREIGN KEY (artist_id) REFERENCES artists(artist_id)
+    )
 """)
+
+# Dimension Tables
+
+# users - users in the app
+# Columns: user_id, first_name, last_name, gender, level
 
 user_table_create = ("""
+    CREATE TABLE IF NOT EXISTS users(
+        user_id VARCHAR PRIMARY KEY,
+        first_name VARCHAR NOT NULL,
+        last_name VARCHAR NOT NULL,
+        gender VARCHAR,
+        level VARCHAR NOT NULL
+    )
 """)
+
+# songs - songs in music database
+# Columns: song_id, title, artist_id, year, duration
 
 song_table_create = ("""
+    CREATE TABLE IF NOT EXISTS songs(
+        song_id VARCHAR PRIMARY KEY,
+        title VARCHAR NOT NULL,
+        artist_id VARCHAR NOT NULL,
+        year SMALLINT,
+        duration FLOAT
+    )
 """)
+
+# artists - artists in music database
+# Columns: artist_id, name, location, lattitude, longitude
 
 artist_table_create = ("""
+    CREATE TABLE IF NOT EXISTS artists(
+        artist_id VARCHAR PRIMARY KEY,
+        name VARCHAR NOT NULL,
+        location VARCHAR,
+        lattitude FLOAT,
+        longitude FLOAT
+    )
 """)
 
+# time - timestamps of records in songplays broken down into specific units
+# Columns: start_time, hour, day, week, month, year, weekday
+
 time_table_create = ("""
+    CREATE TABLE IF NOT EXISTS time(
+        start_time TIMESTAMP PRIMARY KEY,
+        hour SMALLINT,
+        day SMALLINT,
+        week SMALLINT,
+        month SMALLINT,
+        year SMALLINT,
+        weekday VARCHAR
+    )
 """)
 
 # STAGING TABLES
