@@ -136,10 +136,31 @@ time_table_create = ("""
 # STAGING TABLES
 
 staging_events_copy = ("""
-""").format()
+    COPY {}
+    FROM {}
+    iam_role {}
+    json {}
+    region {} 
+""").format(
+    'staging_events',
+    config['s3']['LOG_DATA'],
+    config['IAM_ROLE']['ARN'],
+    config['s3']['LOG_JSONPATH'],
+    'us-west-2'
+)
 
 staging_songs_copy = ("""
-""").format()
+    COPY{}
+    FROM {}
+    iam_role {}
+    json 'auto'
+    region {}
+""").format(
+    'staging_songs',
+    config.get('s3', 'SONG_DATA'),
+    config.get('IAM_ROLE', 'ARN'),
+    'us-west-2'
+)
 
 # FINAL TABLES
 
