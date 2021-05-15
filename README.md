@@ -10,34 +10,28 @@
 **Staging Table**
 
 1- staging_songs - information about songs and artists
-
 2- staging_events - users activities (which song are listening, etc.. )
 
 **Fact tables:**
 
 Table Name: songplays - records in event data associated with song plays i.e. records with page NextSong
-
 Columns: songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agen
 
 **Dimension tables**
 
 1- users: users in the app
-
 Columns: user_id, first_name, last_name, gender, level
 
 2- songs: songs in music database
-
 Columns song_id, title, artist_id, year, duration
 
 3- artists: artists in music database
-
 Columns artist_id, name, location, lattitude, longitude
 
 4- time: timestamps of records in songplays broken down into specific units
-
 Columns: start_time, hour, day, week, month, year, weekday
 
-![ERD](ERD.PNG)
+<image src="ERD.png" />
 
 ## Project Structure
 
