@@ -39,13 +39,18 @@ Columns: start_time, hour, day, week, month, year, weekday
 
 ## ETL Pipeline
 1- create the staging and analytics tables
+
 2- Load the data from s3 to the staging tables on Redshift
+
 3- Insert data into the analytics tables (facts and dimensions) from staging tables.
 
 ## AWS Configurations and Setup 
 1- Created IAM user to access Redshift (full access)
+
 2- Created IAM Role to allow Redshift to access S3 (read access)
+
 3- created A RedShift Cluster
+
 4- Populated the above info in the config file
 
 ## How to Run
